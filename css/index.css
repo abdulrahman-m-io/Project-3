@@ -1,0 +1,275 @@
+:root {
+  --bg-color: #caf0f8;
+  --text-color: #03045e;
+  --card-color: #023e8a;
+  --card-text: #48cae4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  box-shadow: 0 0 0 0 black inset;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Small */
+
+@media (min-width: 768px) {
+  .container {
+    width: 720px;
+  }
+}
+
+/* Medium */
+
+@media (min-width: 992px) {
+  .container {
+    width: 950px;
+  }
+}
+
+/* Large */
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.landing {
+  height: 100dvh;
+}
+
+.landing .container {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  color: var(--text-color);
+  padding-top: 100px;
+  row-gap: 30px;
+  position : relative;
+
+  .title {
+    font-size: 70px;
+    font-family: serif;
+    letter-spacing: 5px;
+    font-weight: bold;
+  }
+
+  span {
+    font-size: 25px;
+    font-weight: 400;
+  }
+
+  .orb {
+    position: relative;
+    background-color: transparent;
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .orb::before,
+  .orb::after {
+    content: "";
+    position: absolute;
+    background: conic-gradient(
+      #00d4ff 0%,
+      #00a6ff 25%,
+      #0084ff 50%,
+      #0066ff 70%,
+      #0047ab 100%
+    );
+    border-radius: 50%;
+    filter: blur(20px);
+    inset: 0;
+    z-index: -1;
+  }
+
+  .orb::before {
+    animation: spin 2s infinite forwards linear;
+  }
+
+  .orb::after {
+    animation: spin 3s infinite reverse forwards linear;
+    background: conic-gradient(
+      #0047ab 0%,
+      #0066ff 25%,
+      #0084ff 50%,
+      #00a6ff 70%,
+      #00d4ff 100%
+    );
+  }
+
+  .orb-toggle {
+    position: absolute;
+    padding: 50px;
+    border-radius: 50%;
+    filter: blur(20px);
+    top: 50%;
+    z-index: 2;
+    cursor: pointer;
+  }
+}
+
+.orb i {
+  transform: scaleX(0);
+  font-size: 20px;
+  color: var(--bg-color);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes chat {
+  0% {
+    width: 100px;
+    height: 100px;
+  }
+  25% {
+    width: 30px;
+    height: 30px;
+  }
+  50% {
+    transform: translateY(200px);
+  }
+  75% {
+    transform: translateX(120px) translateY(190px);
+  }
+  100% {
+    width: 30px;
+    height: 30px;
+    transform: translateX(120px) translateY(190px);
+  }
+}
+
+.landing .container:has(#toggle:checked) .orb {
+  animation: chat 2s ease 1 forwards;
+  border: 1px solid var(--card-text);
+}
+
+.landing .container:has(#toggle:checked) .orb-toggle {
+  cursor: unset;
+}
+
+.landing .container:has(#toggle:checked) .orb > i {
+  transform: scaleX(1) translateY(-6px) translateX(-13px);
+  transition: 0.5s 1s;
+}
+
+.chat-box {
+  position: relative;
+  background-color: var(--card-text);
+  margin-top: -50px;
+  width: 280px;
+  height: 220px;
+  border-radius: 20px;
+  transform: scaleX(0);
+}
+
+.chat-box > span:nth-of-type(1) {
+  position: relative;
+  display: inline-block;
+  background-color: var(--bg-color);
+  font-size: 15px;
+  margin-left: 5px;
+  padding: 10px;
+  top: 20px;
+  border-radius: 20px;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.chat-box > span:nth-of-type(2) {
+  position: relative;
+  display: inline-block;
+  background-color: var(--bg-color);
+  font-size: 15px;
+  top: 30px;
+  right: -70px;
+  padding: 5px 0px 5px 5px;
+  width: 200px;
+  border-radius: 20px;
+  line-height: 23px;
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+.chat-box span:nth-of-type(3) {
+  position: absolute;
+  bottom: 9px;
+  left: 5px;
+  padding-top: 2px;
+  padding-left: 10px;
+  background-color: var(--card-color);
+  color: var(--card-text);
+  width: 262px;
+  height: 33px;
+  border-radius: 20px;
+}
+
+.chat-box span .typing {
+  display: inline-block;
+  font-size: 15px;
+  width: 0ch;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.landing .container:has(#toggle:checked) .typing {
+  animation: typing 2s 1.3s steps(30);
+}
+
+.landing .container:has(#toggle:checked) .chat-box > span:nth-of-type(1) {
+  transition: 0.5s 3.3s;
+  transform: scaleX(1);
+}
+
+.landing .container:has(#toggle:checked) .chat-box > span:nth-of-type(2) {
+  transition: 0.5s 4.5s;
+  transform: scaleX(1);
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 30ch;
+  }
+}
+
+.landing .container:has(#toggle:checked) .chat-box {
+  transform: scaleX(1);
+  transition: 0.5s 1s;
+}
