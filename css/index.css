@@ -1,8 +1,12 @@
 :root {
-  --bg-color: #caf0f8;
+  --bg-color: #48cae4;
   --text-color: #03045e;
   --card-color: #023e8a;
-  --card-text: #48cae4;
+  --card-text: #caf0f8;
+  /* --bg-color: #caf0f8;
+  --text-color: #03045e;
+  --card-color: #023e8a;
+  --card-text: #48cae4; */
 }
 
 * {
@@ -15,6 +19,9 @@
 body {
   background-color: var(--bg-color);
   box-shadow: 0 0 0 0 black inset;
+  cursor:
+    url("../imgs/pointer.png") 16 16,
+    default;
 }
 
 .center {
@@ -66,7 +73,7 @@ body {
   color: var(--text-color);
   padding-top: 100px;
   row-gap: 30px;
-  position : relative;
+  position: relative;
 
   .title {
     font-size: 70px;
@@ -131,7 +138,9 @@ body {
     filter: blur(20px);
     top: 50%;
     z-index: 2;
-    cursor: pointer;
+    cursor:
+      url("../imgs/click.png") 16 16,
+      pointer;
   }
 }
 
@@ -272,4 +281,70 @@ body {
 .landing .container:has(#toggle:checked) .chat-box {
   transform: scaleX(1);
   transition: 0.5s 1s;
+}
+
+.products {
+  margin-top: 100px;
+  height: 200dvh;
+  position: relative;
+  background-color: var(--card-text);
+
+  .title {
+    padding-top: 50px;
+    font-size: 25px;
+    color: var(--text-color);
+    text-align: center;
+  }
+
+  .offers {
+    padding-top: 150px;
+  }
+
+  .cat-title {
+    font-size: 20px;
+    color: var(--card-text);
+    margin-bottom: 80px;
+    background-color: var(--card-color);
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+
+  .cards {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: 50px;
+  }
+
+  .cards img {
+    width: 125px;
+    height: 180px;
+    transition: 0.5s;
+  }
+
+  .card {
+    background-color: var(--card-color);
+    display: flex;
+    flex-direction: column;
+    color: var(--bg-color);
+    justify-content: flex-end;
+    height: 180px;
+    align-items: center;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 150px;
+    border-radius: 30px;
+    position: relative;
+  }
+
+  .cards:has(.card:hover) .card:hover > img {
+    transform: scale(1.2) rotateY(180deg);
+    transition: 0.3s;
+  }
+
+  .ipad {
+    margin-top : 100px;
+  }
 }
