@@ -5,6 +5,6 @@
 -more deals
 -features 
 -pick up your offer 
--login
 -customers
+-login
 -footer 
